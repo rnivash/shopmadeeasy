@@ -8,14 +8,19 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    private readonly IProductService _productService;
+
+    public HomeController(ILogger<HomeController> logger, IProductService productService)
     {
         _logger = logger;
+        _productService = productService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        ICollection<Product> products = await _productService.GetProducts();
+
+        return View(products);
     }
 
     public IActionResult Privacy()
