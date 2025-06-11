@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 COPY *.csproj ./
 COPY skopenet.crt /usr/local/share/ca-certificates/skopenet.crt
@@ -9,5 +9,5 @@ RUN dotnet publish -c Release -o /out
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
-COPY --from=build-env /out ./
-ENTRYPOINT ["dotnet", "testwebapp.dll"]
+COPY --from=build /out .
+ENTRYPOINT ["dotnet", "testwapi.dll"]

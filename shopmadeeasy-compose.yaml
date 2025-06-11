@@ -1,5 +1,32 @@
-Name: ShopMadeEasy
+name: TvsWebsite
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./testwapi
+      dockerfile: Dockerfile
+      tags:
+        - rnivash/backend:latest
+    image: rnivash/backend:latest
+    ports:
+      - "8081:8080"
+    volumes:
+      - v1:/app/vfolder
+  frontend:
+    container_name: frontend
+    build:
+      context: ./testwebapp
+      dockerfile: Dockerfile
+      tags:
+        - rnivash/frontend:latest
+    image: rnivash/frontend:latest
+    ports:
+      - "8082:8080"
+    depends_on:
+      - backend
+    environment:
+      - BackendApiUrl=http://backend:8080/
 
-Services:
-   website:
-     
+volumes:
+  v1:
+    driver: local
