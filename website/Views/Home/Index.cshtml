@@ -5,10 +5,16 @@
 @model ICollection<Product>
 
 @foreach(var product in Model){
-    <div>
-        <img src="@product.ImageUrl" />
-        <h2>@product.Name</h2>
+    <div style="width:100%">
+    <div style="display:inline-block; width:40%">
+       <img src="@product.ImageUrl" style="width:250px" />
+    </div>
+    <div style="display:inline-block">
+     <h2>@product.Name</h2>
         <span>@product.Price</span>
         <button>Add to cart</button>
+    </div>
+        
+       
     </div>
 }

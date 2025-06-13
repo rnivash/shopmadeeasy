@@ -6,4 +6,6 @@ public class Product
 
     public decimal Price { get; set; }
 
+    public string ImageUrl { get; set; }
+
 }
